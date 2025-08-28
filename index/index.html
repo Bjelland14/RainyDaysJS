@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Redefine Your look with Exceptional comfort. Discover the Norwegian design in our exclusive rain jacket collection for both men and women. Crafted to endure the outdoors while maintaining a refined, sophisticated style. Built for the Norwegian weather.">
-        <title>Home Page RainyDays</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Redefine Your look with Exceptional comfort. Discover the Norwegian design in our exclusive rain jacket collection for both men and women. Crafted to endure the outdoors while maintaining a refined, sophisticated style. Built for the Norwegian weather.">
+  <title>Home Page RainyDays</title>
 
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet"href="index/index.css">
-    </head>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="index.css">
+</head>
 
-    <body>
-        <header>
-            <div class="header-container">
-                <img src="/assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo">
-            </div>
+<body>
+  <header>
+  <div class="header-container">
+    <img src="/assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="/menscollection/menscollection.html">Men`s</a></li>       
+      <li><a href="/womencollection/womencollection.html">Women</a></li>                 
+      <li><a href="/checkout/checkout.html">Cart</a></li>            
 
-            <nav>
-                <button onclick="location.href='/mencollection/mencollection.html'">Men's</button>
-                <button onclick="location.href='/womencollection/womencollection.html'">Women's</button>
-                <button onclick="location.href='/checkout/checkout.html'">Cart</button>
-            </nav>
-        </header>
+    </ul>
+  </nav>
+</header>
 
-        <main>
-            <h1>Explore our products</h1>
-            <p>Discover a range of rain jackets.</p>
-            <p> Design with modern pattern and sustianable produce.</p>
-            <p> Our products are local and made for our weather</p>
-            <p> Each of our products have their own (WCR) in their description</p>
-            <p> This means you can choose the rain jacket that suits your preference.</p>
-            <p> Pushing the comfort zone.</p>
-        
-        <h2> Welcomet to Rainydays</h2>
-        <p> Redefine Your look with exceptional comfort.</p>
-        <p> Discover the art of Norwegian design in our exclusive rain jacket collection, crafted to endure the outdoors while maintaining a refined, sophisticated style</p>
-        <p> Pushing the comfort zone</p>    
-    </main>
 
-        <footer>
-            <nav>
-                <ul>
-                <button onclick="location.href='/about-page/about.html'">About</button>
-                <button onclick="location.href='/faq/faq.html'">Customer Service</button>     
-                </ul>
-            </nav>
-        </footer>
-    </body>
+  <main>
+    <h1>Explore our products</h1>
+    <p> Discover a range of rain jackets.</p>
+    <p> Design with modern pattern and sustianable produce.</p>
+    <p> Our products are local and made for our weather</p>
+    <p> Each of our products have their own (WCR) in their description</p>
+    <p> This means you can choose the rain jacket that suits your preference.</p>
+    <p> Pushing the comfort zone.</p>
+
+    <h2>Welcome to Rainydays</h2>
+    <p> Redefine Your look with exceptional comfort.</p>
+    <p> Discover the art of Norwegian design in our exclusive rain jacket collection, crafted to endure the outdoors while maintaining a refined, sophisticated style</p>
+    <p> Pushing the comfort zone</p>    
+
+    
+    <section id="controls"></section>
+    <div id="status" aria-live="polite"></div>
+    <section id="product-list" class="products"></section>
+  </main>
+
+  <footer>
+  <nav>
+    <ul>
+      <li><a href="/about/about.html">About</a></li>
+      <li><a href="/faq/faq.html">Customer Service</a></li>
+    </ul>
+  </nav>
+</footer>
+
+    <script type="module" src="index.js"></script>
+</body>
 </html>

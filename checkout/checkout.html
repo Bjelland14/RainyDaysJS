@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="RainyDays checkout" />
+  <title>Checkout</title>
+
+  <link rel="stylesheet" href="/checkout/checkout.css" />
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <img src="../assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index/index.html">Home</a></li>
+        <li><a href="../menscollection/menscollection.html">Men's</a></li>
+        <li><a href="../womencollection/womencollection.html">Women's</a></li>
+        <li><a href="../checkout/checkout.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="status" aria-live="polite"></div>
+
+    <div class="checkout-layout">
+      <section class="cart" aria-label="Your cart">
+        <h2>Cart</h2>
+        <div id="cart-list" class="cart-list"></div>
+      </section>
+
+      
+      <section class="forms">
+        <form id="shipping" novalidate>
+          <h2>1. Shipping and Delivery</h2>
+          <label>
+            First name*
+            <input name="firstName" type="text" required />
+          </label>
+          <label>
+            Last name*
+            <input name="lastName" type="text" required />
+          </label>
+          <label>
+            Address*
+            <input name="address" type="text" required />
+          </label>
+          <label>
+            City*
+            <input name="city" type="text" required />
+          </label>
+          <label>
+            Post code*
+            <input name="postCode" type="text" required />
+          </label>
+          <label>
+            Phone number*
+            <input name="phone" type="tel" required />
+          </label>
+          <label>
+            Email*
+            <input name="email" type="email" required />
+          </label>
+        </form>
+
+        <form id="payment" novalidate>
+          <h2>2. Payment Method</h2>
+          <div class="payment-options">
+            <label><input type="radio" name="pay" value="apple" checked /> Apple Pay</label>
+            <label><input type="radio" name="pay" value="visa" /> Visa</label>
+            <label><input type="radio" name="pay" value="vipps" /> Vipps</label>
+          </div>
+
+          <div class="card-fields">
+            <label>
+              Cardholder’s name*
+              <input name="cardName" type="text" required />
+            </label>
+            <label>
+              Card number*
+              <input name="cardNumber" inputmode="numeric" minlength="12" maxlength="19" required />
+            </label>
+            <label>
+              Expiry (MM/YY)*
+              <input name="expiry" placeholder="MM/YY" required />
+            </label>
+            <label>
+              CVV*
+              <input name="cvv" inputmode="numeric" minlength="3" maxlength="4" required />
+            </label>
+          </div>
+        </form>
+      </section>
+
+      <aside class="summary" aria-label="Order summary">
+        <h2>3. Complete Order</h2>
+        <div class="summary-rows">
+          <div><span>Items Subtotal</span><span id="sum-subtotal">–</span></div>
+          <div><span>Shipping (1–5 business days)</span><span id="sum-shipping">0 kr</span></div>
+          <div><span>Estimated Tax</span><span id="sum-tax">0 kr</span></div>
+          <div class="total"><span>Total</span><span id="sum-total">–</span></div>
+        </div>
+
+        <button id="complete" class="complete-btn" type="button">Complete order</button>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="../about/about.html">About</a></li>
+        <li><a href="../faq/faq.html">Customer Service</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script type="module" src="/checkout/checkout.js"></script>
+</body>
+</html>

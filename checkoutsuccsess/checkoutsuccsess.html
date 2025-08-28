@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Order confirmation – RainyDays" />
+  <title>Order Confirmation</title>
+
+  <link rel="stylesheet" href="/styles.css>
+  
+  <link rel="stylesheet" href="checkoutsuccsess.css" />
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <img src="../assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../menscollection/menscollection.html">Men's</a></li>
+        <li><a href="../womencollection/womencollection.html">Women's</a></li>
+        <li><a href="../checkout/checkout.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="confirm-card">
+      <div class="icon-wrap" aria-hidden="true">
+        <img src="../assets/Sjekksymbol.png" alt="Confirmation checkmark" />
+      </div>
+
+      <h1>Order confirmed 🎉</h1>
+      <p id="order-id" class="muted"></p>
+      <p>Thank you for your purchase! We’re getting your order ready for shipment.</p>
+
+      <div id="status" aria-live="polite"></div>
+
+      <div id="order-summary" class="summary" hidden>
+        <h2>Order summary</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="summary-rows"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4" class="right">Total</td>
+                <td id="summary-total"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="button" href="../index.html">Continue shopping</a>
+        <a class="button secondary" href="../checkout/index.html">View cart</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="../about/about.html">About</a></li>
+        <li><a href="../faq/faq.html">Customer Service</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script type="module" src="checkoutsuccsess.js"></script>
+</body>
+</html>
