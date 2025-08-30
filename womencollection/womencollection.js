@@ -4,6 +4,7 @@ const statusEl = document.querySelector("#status");
 const money = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK" });
 
 function setStatus(msg, variant = "info") {
+  if (!statusEl) return;
   statusEl.hidden = !msg;
   statusEl.textContent = msg || "";
   statusEl.dataset.variant = msg ? variant : "";
@@ -31,6 +32,7 @@ function card(p) {
 }
 
 function render(list) {
+  if (!listEl) return;
   listEl.innerHTML = list.length ? list.map(card).join("") : "<p>No products found.</p>";
 }
 
