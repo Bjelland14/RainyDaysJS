@@ -14,20 +14,20 @@ function card(p) {
   const price = onSale
     ? `<s>${money.format(p.price)}</s> <strong>${money.format(p.discountedPrice)}</strong>`
     : `<strong>${money.format(p.price)}</strong>`;
+
   return `
     <article class="product">
-      <a href="../product/index.html?id=${encodeURIComponent(p.id)}">
+      <a href="../product/product.html?id=${encodeURIComponent(p.id)}">
         <img src="${p.image?.url}" alt="${p.image?.alt || p.title}" loading="lazy" />
       </a>
       <div class="product-info">
         <h2>${p.title}</h2>
         <p>${p.description}</p>
         <p class="price">${price}</p>
-        <button type="button" onclick="location.href='../product/index.html?id=${encodeURIComponent(p.id)}'">
-          View Details
-        </button>
+        <a class="button" href="../product/product.html?id=${encodeURIComponent(p.id)}">View details</a>
       </div>
-    </article>`;
+    </article>
+  `;
 }
 
 function render(list) {
@@ -36,13 +36,11 @@ function render(list) {
 
 (async function init() {
   try {
-    setStatus("Loading products …");
+    setStatus("Loading products…", "loading");
     const res = await fetch(API);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const { data = [] } = await res.json();
-
-    const females = data.filter(p => p.gender === "Female");
-    render(females);
+    render(data.filter(p => p.gender === "Female"));
     setStatus("");
   } catch (err) {
     console.error(err);
