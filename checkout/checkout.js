@@ -1,31 +1,28 @@
-const statusEl = document.querySelector("#status");
-const listEl = document.querySelector("#cart-list");
-const subtotalEl = document.querySelector("#sum-subtotal");
-const totalEl = document.querySelector("#sum-total");
-const shippingEl = document.querySelector("#sum-shipping");
-const taxEl = document.querySelector("#sum-tax");
+const statusEl    = document.querySelector("#status");
+const listEl      = document.querySelector("#cart-list");
+const subtotalEl  = document.querySelector("#sum-subtotal");
+const totalEl     = document.querySelector("#sum-total");
+const shippingEl  = document.querySelector("#sum-shipping");
+const taxEl       = document.querySelector("#sum-tax");
 const completeBtn = document.querySelector("#complete");
 
-const money = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK" });
+const money = new Intl.NumberFormat("nb-NO",{ style:"currency", currency:"NOK" });
 
-function setStatus(msg, variant = "info") {
+function setStatus(msg, variant="info"){
   statusEl.hidden = !msg;
   statusEl.textContent = msg || "";
   statusEl.dataset.variant = msg ? variant : "";
 }
 
-function getCart() {
-  try {
-    return JSON.parse(localStorage.getItem("cart") || "[]");
-  } catch {
-    return [];
-  }
+function getCart(){
+  try { return JSON.parse(localStorage.getItem("cart") || "[]"); }
+  catch { return []; }
 }
-function saveCart(cart) {
+function saveCart(cart){
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function line(item) {
+function line(item){
   const lineTotal = item.price * item.qty;
   return `
     <div class="cart-item" data-id="${item.id}" data-size="${item.size || ""}">
@@ -41,55 +38,55 @@ function line(item) {
         </div>
       </div>
       <div class="price">${money.format(lineTotal)}</div>
-    </div>
-  `;
+    </div>`;
 }
 
-function render() {
+function render(){
   const cart = getCart();
-  if (!cart.length) {
+  if (!cart.length){
     listEl.innerHTML = `<p>Your cart is empty.</p>`;
     subtotalEl.textContent = money.format(0);
+    shippingEl.textContent = money.format(0);
+    taxEl.textContent = money.format(0);
     totalEl.textContent = money.format(0);
     return;
   }
   listEl.innerHTML = cart.map(line).join("");
-
   calcTotals();
   bindRowEvents();
 }
 
-function calcTotals() {
+function calcTotals(){
   const cart = getCart();
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const shipping = 0; 
-  const tax = 0; 
+  const subtotal = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+  const shipping = 0; // legg evt. til logikk
+  const tax = 0;      // legg evt. til logikk
   subtotalEl.textContent = money.format(subtotal);
   shippingEl.textContent = money.format(shipping);
   taxEl.textContent = money.format(tax);
   totalEl.textContent = money.format(subtotal + shipping + tax);
 }
 
-function bindRowEvents() {
-  listEl.querySelectorAll(".cart-item").forEach(row => {
-    const id = row.dataset.id;
+function bindRowEvents(){
+  listEl.querySelectorAll(".cart-item").forEach(row=>{
+    const id   = row.dataset.id;
     const size = row.dataset.size || null;
     const qtyInput = row.querySelector(".qty");
-    const removeBtn = row.querySelector(".remove");
+    const removeBtn= row.querySelector(".remove");
 
-    qtyInput.addEventListener("change", () => {
+    qtyInput.addEventListener("change", ()=>{
       const val = Math.max(1, Number(qtyInput.value) || 1);
       qtyInput.value = val;
       const cart = getCart();
       const item = cart.find(x => x.id === id && (x.size || null) === size);
-      if (item) {
+      if (item){
         item.qty = val;
         saveCart(cart);
         render();
       }
     });
 
-    removeBtn.addEventListener("click", () => {
+    removeBtn.addEventListener("click", ()=>{
       const cart = getCart().filter(x => !(x.id === id && (x.size || null) === size));
       saveCart(cart);
       render();
@@ -97,37 +94,39 @@ function bindRowEvents() {
   });
 }
 
-function validateForms() {
+function validateForms(){
   const shipping = document.querySelector("#shipping");
-  const payment = document.querySelector("#payment");
-  if (!shipping.checkValidity()) {
+  const payment  = document.querySelector("#payment");
+  if (!shipping.checkValidity()){
     setStatus("Please fill out all required shipping fields.", "error");
-    shipping.reportValidity();
-    return false;
+    shipping.reportValidity(); return false;
   }
-  if (!payment.checkValidity()) {
+  if (!payment.checkValidity()){
     setStatus("Please fill out all required payment fields.", "error");
-    payment.reportValidity();
-    return false;
+    payment.reportValidity(); return false;
   }
   setStatus("");
   return true;
 }
 
-function completeOrder() {
+function completeOrder(){
   if (!validateForms()) return;
-  location.href = "../checkoutsuccsess/checkoutsuccess.html";
+
+  // valgfritt: orderId som vises på success-siden
+  const orderId = "RD-" + Math.random().toString(36).slice(2,8).toUpperCase();
+  sessionStorage.setItem("orderId", orderId);
+
+  // VIKTIG: peke til riktig mappe/filnavn:
+  location.href = "../checkoutsuccess/index.html";
 }
 
-(function init() {
-  try {
-    setStatus("Loading cart…", "loading");
+(function init(){
+  try{
+    setStatus("Loading cart…","loading");
     render();
     setStatus("");
-  } catch (e) {
-    console.error(e);
-    setStatus("Could not load your cart.", "error");
+  }catch(e){
+    setStatus("Could not load your cart.","error");
   }
-
   completeBtn.addEventListener("click", completeOrder);
 })();
