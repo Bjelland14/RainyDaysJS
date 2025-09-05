@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Order confirmation – RainyDays" />
-  <title>Order Confirmation</title>
+  <title>Order Confirmation | RainyDays</title>
 
-  <link rel="stylesheet" href="/styles.css>
   
-  <link rel="stylesheet" href="checkoutsuccsess.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  
+  <link rel="stylesheet" href="orderconfirmation.css" />
 </head>
 <body>
   <header>
@@ -17,23 +18,29 @@
     </div>
     <nav>
       <ul>
-        <li><a class="btn" href="../index/index.html">Home</a></li>
-        <li><a class="btn" href="../menscollection/menscollection.html">Men's</a></li>
-        <li><a class="btn" href="../womencollection/womencollection.html">Women's</a></li>
-        <li><a class="btn" href="../checkout/checkout.html">Cart</a></li>
+      <li><a href="../index/index.html">Home</a></li>
+      <li><a href="../menscollection/menscollection.html">Men`s</a></li>       
+      <li><a href="../womencollection/womencollection.html">Women's</a></li>                 
+      <li><a href="../checkout/checkout.html"aria-current="page">Cart</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
+  <main class="container">
     <section class="confirm-card">
-      <div class="icon-wrap" aria-hidden="true">
-        <img src="../assets/Sjekksymbol.png" alt="Confirmation checkmark" />
-      </div>
-
       <h1>Order confirmed 🎉</h1>
       <p id="order-id" class="muted"></p>
+
       <p>Thank you for your purchase! We’re getting your order ready for shipment.</p>
+
+      <div class="next-steps">
+        <h2>What happens next?</h2>
+        <ul>
+          <li>You’ll receive a confirmation email shortly.</li>
+          <li>We’ll send a tracking link as soon as your order ships.</li>
+          <li>Typical delivery: <strong>1–5 business days</strong> in Norway.</li>
+        </ul>
+      </div>
 
       <div id="status" aria-live="polite"></div>
 
@@ -62,8 +69,12 @@
       </div>
 
       <div class="actions">
-        <a class="button" href="../index.html">Continue shopping</a>
-        <a class="button secondary" href="../checkout/index.html">View cart</a>
+        <a class="button" href="../index/index.html">Continue shopping</a>
+        <a class="button secondary" href="../checkout/checkout.html">View cart</a>
+      </div>
+
+      <div class="help">
+        <p>Need help? Visit our <a href="../faq/faq.html">Customer Service</a> page.</p>
       </div>
     </section>
   </main>
@@ -71,13 +82,13 @@
   <footer>
     <nav>
       <ul>
-        <li><a class="btn" href="../About/About.html">About</a></li>
-        <li><a class="btn" href="../faq/faq.html">Customer Service</a></li>
-        <li><a class="btn" href="../product/product.html">Product</a></li>
+        <li><a href="../about/about.html">About</a></li>
+        <li><a href="../faq/faq.html">Customer Service</a></li>
+        <li><a href="../product/product.html">Product</a></li>
       </ul>
     </nav>
   </footer>
 
-  <script type="module" src="checkoutsuccsess.js"></script>
+  <script type="module" src="orderconfirmation.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 /* Header */
 header {
   width: 100%;
-  background: #6200EE;      /* Lilla bakgrunn */
+  background: #1E3A8A;      /* Lilla bakgrunn */
   color: #fff;
   margin: 0;
-  padding: 0.75rem 1.25rem;
+  padding: 0.4rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -18,7 +18,7 @@ header {
 }
 
 .logo {
-  max-height: 3rem;   /* gjør logoen litt mindre */
+  max-height:3rem;   
   width: auto;
   display: block;
 }
@@ -56,3 +56,95 @@ header nav a.btn:focus-visible {
   background: #1f283a;
   outline: none;
 }
+
+html, body { height: 100%; }
+body {
+  min-height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+  width: 100%;
+  background: #6200EE;
+  color: #fff;
+}
+
+/* Høyden/luft (juster om du vil ha større/mindre) */
+header { padding: 0.75rem 0; }   /* øk til 1rem om du vil ha høyere header */
+footer { padding: 0.75rem 0; }   /* øk til 1rem om du vil ha høyere footer */
+
+/* Indre container som sentrerer innhold og begrenser linjelengde */
+.header-container, .footer-container {
+  max-width: 1200px;         /* bredden du vil at innholdet skal holde seg til */
+  margin: 0 auto;
+  padding: 0 1rem;           /* litt side-padding på små skjermer */
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* midtstiller nav/innhold */
+  gap: 1rem;
+}
+
+/* Logoen – gjør den litt større om ønskelig */
+.logo { 
+  max-height: 44px;          /* øk til 52px om du vil */
+  width: auto;
+  display: block;
+}
+
+/* Navigasjon i header */
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+header nav a {
+  color: #fff;
+  padding:0.25rem 0.5rem;
+  font-size: 0.95rem;
+}
+header nav a:hover,
+header nav a:focus-visible {
+  background: rgba(255,255,255,.15);
+  text-decoration: none;
+  outline: none;
+}
+
+/* Footer-nav likt som header-nav */
+footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+footer nav a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+footer nav a:hover { text-decoration: underline; }
+
+main { flex: 1; }
+
+.btn {
+  background: #2B3549;
+  color: #fff;
+  padding: .45rem .9rem;
+  border-radius: .5rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { filter: brightness(1.07); text-decoration: none; }
+.btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }

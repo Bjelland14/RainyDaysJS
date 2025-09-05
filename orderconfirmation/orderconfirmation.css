@@ -1,0 +1,98 @@
+/* Full høyde + sticky footer via global styles.css (som har body/min-height/flex)
+   Her styler vi kun kortet og tabellen for suksess-siden. */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.confirm-card {
+  margin: 1.25rem auto 2rem;
+  max-width: 760px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.confirm-card h1 {
+  margin: 0 0 .25rem;
+  font-size: 1.8rem;
+}
+
+.muted {
+  color: #555;
+  margin: 0 0 .75rem;
+}
+
+.next-steps {
+  margin: 1rem 0 1.25rem;
+}
+.next-steps h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.25rem;
+}
+.next-steps ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.5;
+}
+
+#status {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #EEF7FF;
+  color: #1F2D3D;
+}
+#status[hidden] { display: none !important; }
+
+.summary {
+  margin-top: 1rem;
+}
+.table-wrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+th, td {
+  text-align: left;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 0.6rem 0.5rem;
+  vertical-align: top;
+}
+tfoot td {
+  border-top: 2px solid #E5E7EB;
+  font-weight: 800;
+}
+.right { text-align: right; }
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.button {
+  background: #2B3549;
+  color: #fff;
+  padding: .6rem 1rem;
+  border-radius: .5rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+.button:hover { filter: brightness(1.07); text-decoration: none; }
+.button.secondary {
+  background: #E5E7EB;
+  color: #111;
+}
+
+.help { margin-top: 1rem; }
+.help a { text-decoration: underline; }
+.help a:hover { text-decoration: none; }

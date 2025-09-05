@@ -94,7 +94,7 @@ function renderProduct(p) {
       price: unitPrice
     });
 
-    setStatus(`${p.title} (${size}) ble lagt i handlekurven ✅`, "info");
+    setStatus(`${p.title} (${size}) Added to cart ✅`, "info");
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
@@ -141,6 +141,6 @@ async function loadRelated(currentId, gender) {
     setStatus("");
   } catch (err) {
     console.error(err);
-    setStatus("Kunne ikke hente produktet. Prøv igjen senere.", "error");
+    setStatus("Could not retrieve the product. Please try again later", "error");
   }
 })();
