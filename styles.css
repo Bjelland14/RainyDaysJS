@@ -65,10 +65,21 @@ body {
   flex-direction: column;
 }
 
-header, footer {
-  width: 100%;
-  background: #6200EE;
-  color: #fff;
+header {
+  background-color: #60A5FA;
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+footer {
+  background-color: #3B82F6;
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+  text-align: center;
 }
 
 /* Høyden/luft (juster om du vil ha større/mindre) */

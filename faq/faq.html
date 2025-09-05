@@ -3,80 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FAQ – Hard Test</title>
-  <style>
-    html, body { height: 100%; margin: 0; }
-    body { display: flex; flex-direction: column; min-height: 100vh; font-family: Arial; color:#111; background:#fff; }
+  <meta name="description" content="RainyDays – Frequently Asked Questions" />
+  <title>FAQ | RainyDays</title>
 
-    header { background:#6200EE; color:#fff; padding:.6rem 1rem; text-align:center; }
-    .header-container { display:flex; justify-content:center; }
-    .logo { max-height: 3rem; display:block; }
-    header nav ul { list-style:none; margin:.25rem 0 0; padding:0; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
-    header nav a { color:#fff; text-decoration:none; font-weight:600; }
-    header nav a:hover { text-decoration:underline; }
-
-    /* Main fyller høyden */
-    main { flex: 1; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-
-    /* Footer ALLTID synlig nederst */
-    footer { 
-      background:#6200EE; 
-      color:#fff; 
-      text-align:center; 
-      padding:.6rem 1rem; 
-      margin-top:auto;             /* <- skyver ned */
-      position: static !important; /* <- overstyrer ev. fixed fra andre filer */
-      display: block !important;
-      z-index: 10;
-      outline: 3px dashed rgba(255,255,255,.4); /* debug-kant - fjern senere */
-    }
-    footer nav ul { list-style:none; margin:0; padding:.25rem 0 0; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-    footer nav a { color:#fff; text-decoration:none; font-weight:600; }
-    footer nav a:hover { text-decoration:underline; }
-
-    /* FAQ-innhold */
-    h1 { text-align:center; margin-bottom:2rem; }
-    .faq details { border:1px solid #E5E7EB; border-radius:.5rem; padding:.75rem 1rem; margin-bottom:1rem; background:#fff; }
-    .faq details[open] { background:#F9FAFB; }
-    .faq summary { font-weight:600; cursor:pointer; }
-    .faq p { margin-top:.75rem; line-height:1.4; }
-  </style>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="faq.css" />
 </head>
 <body>
   <header>
-    <div class="header-container">
+    <div class="header-shell">
       <img src="../assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo" />
+      <nav aria-label="Main">
+        <ul>
+          <li><a class="btn" href="../index/index.html">Home</a></li>
+          <li><a class="btn" href="../menscollection/menscollection.html">Men's</a></li>
+          <li><a class="btn" href="../womencollection/womencollection.html">Women's</a></li>
+          <li><a class="btn" href="../checkout/checkout.html">Cart</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav>
-      <ul>
-        <li><a href="../index/index.html">Home</a></li>
-        <li><a href="../menscollection/menscollection.html">Men's</a></li>
-        <li><a href="../womencollection/womencollection.html">Women's</a></li>
-        <li><a href="../checkout/checkout.html">Cart</a></li>
-      </ul>
-    </nav>
   </header>
 
   <main>
     <h1>Frequently Asked Questions</h1>
-    <section class="faq">
-      <details>
+
+    <!-- Toolbar (search + open/close) will be injected here by JS -->
+    <section class="faq" aria-label="FAQ">
+      <details id="faq-what">
         <summary>What is RainyDays?</summary>
         <p>RainyDays is a Norwegian outdoor brand focused on durable, stylish rain jackets designed for Scandinavian weather.</p>
       </details>
-      <details>
+
+      <details id="faq-wcr">
         <summary>What does WCR mean?</summary>
         <p>WCR stands for Water Column Rating – the waterproof measurement of our jackets.</p>
       </details>
-      <details>
+
+      <details id="faq-shipping">
         <summary>How long does shipping take?</summary>
         <p>Orders are normally delivered within 3–5 business days in Norway.</p>
       </details>
-      <details>
+
+      <details id="faq-returns">
         <summary>Can I return a product?</summary>
         <p>Yes, you can return items within 30 days provided they are unused and with tags.</p>
       </details>
-      <details>
+
+      <details id="faq-contact">
         <summary>How do I contact customer service?</summary>
         <p>You can reach us via email at support@rainydays.no.</p>
       </details>
@@ -84,13 +57,17 @@
   </main>
 
   <footer>
-    <nav>
-      <ul>
-        <li><a href="../about/about.html">About</a></li>
-        <li><a href="../faq/faq.html">Customer Service</a></li>
-        <li><a href="../product/product.html">Product</a></li>
-      </ul>
-    </nav>
+    <div class="footer-shell">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a class="btn" href="../about/about.html">About</a></li>
+          <li><a class="btn" href="../faq/faq.html" aria-current="page">Customer Service</a></li>
+          <li><a class="btn" href="../product/product.html">Product</a></li>
+        </ul>
+      </nav>
+    </div>
   </footer>
+
+  <script src="faq.js" type="module"></script>
 </body>
 </html>

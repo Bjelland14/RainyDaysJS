@@ -22,8 +22,10 @@ button {
 button:hover { filter: brightness(1.1); }
 button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
 
+
+
 header {
-  background-color: #6200EE;
+  background-color: #60A5FA;
   color: #FFFFFF;
   padding: 0.75rem 1.25rem;
   display: flex;
@@ -185,7 +187,7 @@ main {
 .card .button:hover { filter: brightness(1.1); text-decoration: none; }
 
 footer {
-  background-color: #6200EE;
+  background-color: #3B82F6;
   color: #FFFFFF;
   padding: 0.5rem 1rem;
   text-align: center;

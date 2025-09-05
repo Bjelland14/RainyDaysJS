@@ -1,5 +1,6 @@
+/* Page container spacing (main area) */
 main {
-  max-width: 800px;
+  max-width: 880px;
   margin: 2rem auto;
   padding: 0 1rem;
   text-align: left;
@@ -7,70 +8,88 @@ main {
 
 h1 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 0 0 1.25rem;
 }
 
+/* Injected toolbar (search + open/close) */
+.faq-toolbar {
+  margin: 0 auto 1rem;
+  padding: .6rem .75rem;
+  border: 1px solid #E5E7EB;
+  border-radius: .5rem;
+  background: #F8FAFC;
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.faq-tools {
+  display: contents;
+}
+
+#faq-search {
+  flex: 1 1 240px;
+  min-width: 220px;
+  padding: .5rem .6rem;
+  border: 1px solid #D1D5DB;
+  border-radius: .375rem;
+}
+
+.faq-actions {
+  display: flex;
+  gap: .5rem;
+}
+
+.faq-actions button {
+  background: #3B82F6;
+  color: #fff;
+  padding: .45rem .75rem;
+  border: none;
+  border-radius: .375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.faq-actions button:hover { filter: brightness(1.05); }
+
+/* FAQ blocks */
 .faq details {
   border: 1px solid #E5E7EB;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
+  border-radius: .5rem;
+  padding: .75rem 1rem;
   margin-bottom: 1rem;
   background: #fff;
-  transition: background 0.2s;
+  transition: background .2s;
 }
-
-.faq details[open] {
-  background: #F9FAFB;
-}
+.faq details[open] { background: #F9FAFB; }
 
 .faq summary {
   font-weight: 600;
   cursor: pointer;
   outline: none;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "▸";
+  float: right;
+  transition: transform .15s ease;
+}
+.faq details[open] summary::after {
+  transform: rotate(90deg);
 }
 
 .faq p {
-  margin-top: 0.75rem;
+  margin-top: .75rem;
   color: #333;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
+/* Links inside FAQ answers */
 .faq a {
-  color: #6200EE;
+  color: #1E40AF;
   text-decoration: underline;
 }
-.faq a:hover {
-  text-decoration: none;
-}
-footer {
-  background: #6200EE;
-  color: #fff;
-  text-align: center;
-  padding: 0.4rem 0.75rem;   
-}
+.faq a:hover { text-decoration: none; }
 
-footer nav ul {
-  list-style: none;
-  margin: 0.25rem 0 0;      
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;              
-  flex-wrap: wrap;
-}
-
-footer nav li {
-  display: inline-flex;
-}
-
-footer nav a {
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.9rem;          
-  padding: 0.15rem 0.4rem;    
-}
-
-footer nav a:hover {
-  text-decoration: underline;
-}
+/* Make footer stick nicely with your global layout */
