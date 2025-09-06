@@ -13,7 +13,7 @@ a:hover, a:focus { text-decoration: underline; outline: none; }
 
 header {
   width: 100%;
-  background: #6200EE;
+  background: #60A5FA;
   color: #fff;
   margin: 0;                 
   padding: 0.75rem 1.25rem;
@@ -170,7 +170,7 @@ main {
 
 footer {
   width: 100%;
-  background: #6200EE;
+  background: #3B82F6;
   color: #fff;
   text-align: center;
   padding: 0.6rem 1rem;

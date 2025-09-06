@@ -85,11 +85,9 @@ h1 {
   line-height: 1.45;
 }
 
-/* Links inside FAQ answers */
 .faq a {
   color: #1E40AF;
   text-decoration: underline;
 }
 .faq a:hover { text-decoration: none; }
 
-/* Make footer stick nicely with your global layout */

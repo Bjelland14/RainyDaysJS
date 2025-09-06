@@ -24,7 +24,7 @@ function card(p) {
       </a>
       <p class="price">${price}</p>
       <p class="meta"><span>${p.gender}</span> • <span>${(p.tags||[]).join(", ")}</span></p>
-      <a class="button" href="product/index.html?id=${encodeURIComponent(p.id)}">Vis detaljer</a>
+      <a class="button" href="/product/product.html?id=${encodeURIComponent(p.id)}">Show details</a>
     </article>`;
 }
 

@@ -15,7 +15,7 @@ body {
 }
 
 header {
-  background: #6200EE;
+  background: #60A5FA;
   color: #fff;
   padding: 0.75rem 1.25rem;
   display: flex;
@@ -85,7 +85,7 @@ main {
 }
 
 footer {
-  background: #6200EE;
+  background: #3B82F6;
   color: #fff;
   text-align: center;
   padding: 0.4rem 0.75rem;   
