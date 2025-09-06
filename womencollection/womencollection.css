@@ -168,6 +168,18 @@ main {
   filter: brightness(1.1);
 }
 
+html, body { height: 100%; }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Viktig: main må få lov å vokse, så footer skyves ned */
+main { flex: 1; }
+
+/* (valgfritt) garanter at footer alltid legger seg nederst */
+footer { margin-top: auto; }
 footer {
   width: 100%;
   background: #3B82F6;

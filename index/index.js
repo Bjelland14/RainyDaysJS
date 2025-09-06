@@ -18,7 +18,7 @@ function card(p) {
     : `<strong>${money.format(p.price)}</strong>`;
   return `
     <article class="card">
-      <a class="card-link" href="product/index.html?id=${encodeURIComponent(p.id)}">
+      <a class="card-link" href="/product/product.html?id=${encodeURIComponent(p.id)}">
         <img src="${p.image?.url}" alt="${p.image?.alt || p.title}" loading="lazy" />
         <h3>${p.title}</h3>
       </a>
@@ -30,7 +30,7 @@ function card(p) {
 
 function render(list) {
   if (!listEl) return;
-  listEl.innerHTML = list.length ? list.map(card).join("") : "<p>Fant ingen produkter.</p>";
+  listEl.innerHTML = list.length ? list.map(card).join("") : "<p>Found no products.</p>";
 }
 
 (async function init() {
@@ -50,14 +50,14 @@ function render(list) {
       controlsEl.innerHTML = `
         <form id="filters" class="filters">
           <label>
-            Kjønn
+            Gender:
             <select name="gender">
-              <option value="">Alle</option>
+              <option value="">All</option>
               <option value="Male"${genderFromURL==="Male"?" selected":""}>Male</option>
               <option value="Female"${genderFromURL==="Female"?" selected":""}>Female</option>
             </select>
           </label>
-          <button type="submit">Bruk filter</button>
+          <button type="submit">Use filter</button>
         </form>`;
       const form = controlsEl.querySelector("#filters");
       form.addEventListener("submit", (e) => {
@@ -68,7 +68,7 @@ function render(list) {
       });
     }
   } catch (e) {
-    setStatus("Kunne ikke hente produkter. Prøv igjen senere.");
+    setStatus("Could not retrieve products. Please try again later..");
   } finally {
     setStatus("");
   }

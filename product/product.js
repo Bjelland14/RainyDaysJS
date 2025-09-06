@@ -40,7 +40,6 @@ function renderProduct(p) {
   }
   if (crumbTitleEl) crumbTitleEl.textContent = p.title;
 
-  // produktdetalj
   const onSale = p.onSale && p.discountedPrice < p.price;
   const tags = (p.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
 
@@ -127,10 +126,10 @@ async function loadRelated(currentId, gender) {
 
 (async function init() {
   try {
-    setStatus("Laster produkt …", "loading");
+    setStatus("Loading product …", "loading");
     const url = new URL(location.href);
     const id = url.searchParams.get("id");
-    if (!id) throw new Error("Mangler id i URL");
+    if (!id) throw new Error("Missing ID in URL");
 
     const res = await fetch(`${API}/${id}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
