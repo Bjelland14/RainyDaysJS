@@ -1,32 +1,50 @@
-# 🌧️ RainyDays – Online Store
+ RainyDays- JS assignment 1
 
-This is my **JavaScript 1 Course Assignment** at Noroff.  
-The project is a simple e-commerce site built with HTML, CSS, and JavaScript that fetches products from the Noroff API.
+RainyDays is a prototype e-commerce webshop built as part of the Noroff Frontend Development course.  
+The application simulates an online store for rain jackets, where users can browse products, view product details, add items to a cart, and complete a checkout process with an order confirmation screen.  
 
-## 📌 Pages
 
-- `index.html` → Homepage displaying product list and filter (from API).
-- `product/product.html` → Single product page, showing details based on ID in URL.
-- `checkout/index.html` → Checkout page showing cart items (stored in localStorage).
-- `checkoutsuccsess/checkoutsuccsess.html` → Confirmation page after checkout.
-- `mencollection/` and `womencollection/` → Extra category pages.
-- `about/` and `faq/` → About us and customer service.
 
-## 🚀 Technologies
+- Assignment Requirements  
 
-- **HTML5** for structure  
-- **CSS3** for styling (both shared and page-specific stylesheets)  
-- **JavaScript (ES6)** for:
-  - Fetching products from API
-  - Filtering products (gender)
-  - Displaying single product details
-  - Adding and removing items from cart
-  - Saving cart data in `localStorage`
+ User Stories  
+- As a user, I want to view a list of products on the homepage.  
+- As a user, I want to filter products by category (men’s or women’s).  
+- As a user, I want to view a single product page with more detail.  
+- As a user, I want to add a product to my basket.  
+- As a user, I want to remove a product from my basket.  
+- As a user, I want to view a summary of my cart on the checkout page.  
+- As a user, I want to view an order-confirmation screen after checking out.  
 
-## 🔗 API
+ Required Pages  
+- Home Page: `/index/index.html` – product list with filters.  
+- Product Page: `/product/product.html` – detailed product view.  
+- Checkout Page: `/checkout/checkout.html` – cart summary and forms.  
+- Confirmation Page: `/checkoutsuccsess/checkoutsuccsess.html` – order confirmation.  
 
-The project uses the [Noroff Rainy Days API](https://v2.api.noroff.dev/rainy-days) to fetch product data.
+ Optional Pages Implemented  
+- Men’s Collection  
+- Women’s Collection  
+- FAQ  
+- About
 
-Example request:
-```js
-fetch("https://v2.api.noroff.dev/rainy-days")
+
+## 🛠️ Tech Stack  
+- HTML – semantic and accessible structure  
+- CSS3 – responsive design with flexbox & grid  
+- LocalStorage – cart persistence across pages  
+- Noroff API – products fetched dynamically from `https://v2.api.noroff.dev/rainy-days`  
+
+---
+
+ Features Implemented  
+- Dynamic "Product listing" with API data (no hardcoded products).  
+- Filter by gender: Men’s / Women’s collections.  
+- Product details page with sizes, quantity selector, and add-to-cart.  
+- Cart management: update quantity, remove items.  
+- Checkout page: shipping form, payment form, order summary.  
+- Confirmation page: thank you message, order summary, continue shopping.  
+- Loading indicators  when fetching data.  
+- Accessible navigation via header and footer across all pages.  
+
+
