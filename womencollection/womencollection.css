@@ -97,7 +97,7 @@ header nav a:focus-visible {
 #status[data-variant="loading"] { background: #EFF6FF; color: #1E3A8A; }
 #status[data-variant="info"]    { background: #ECFEFF; color: #134E4A; }
 #status[data-variant="error"]   { background: #FEF2F2; color: #7F1D1D; }
-
+ 
 
 .collection-banner {
   background: var(--clr-accent);

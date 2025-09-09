@@ -1,3 +1,30 @@
+/* ========== Baseline / layout ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  min-height: 100svh;           /* svh håndterer mobil adresselinje */
+  margin: 0;
+  display: flex;
+  flex-direction: column;        /* gjør at footer kan dyttes ned */
+  color: #111;
+  background: #fff;
+}
+
+/* Denne må finnes i HTML: <main> ... </main> */
+main { flex: 1; }                /* fyller høyden mellom header og footer */
+
+/* Sentraliserte seksjoner (innhold) */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ========== Statusboks ========== */
 #status {
   max-width: 1100px;
   margin: 1rem auto;
@@ -6,11 +33,61 @@
   background: #EEF7FF;
   color: #1F2D3D;
 }
+#status[hidden] { display: none !important; }
 
-#status[hidden] {
-  display: none !important;
+
+#status[data-variant="loading"] { background: #F1F0FF; color: #2B2B2B; }
+#status[data-variant="info"]    { background: #EEF7FF; color: #1F2D3D; }
+#status[data-variant="error"]   { background: #FFEFEF; color: #7A1C1C; }
+
+/* ========== Header (full bredde) ========== */
+header {
+  width: 100%;
+  background: #60A5FA;          /* strekker seg full bredde */
+  color: #fff;
+  margin: 0;
+}
+.header-container {
+  max-width: 1100px;            /* innholdet sentreres og begrenses */
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.logo {
+  max-height: 3.25rem;
+  width: auto;
+  display: block;
 }
 
+header nav { margin: 0; padding: 0; }
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+header nav li { display: inline-flex; }
+header nav a {
+  color: #fff;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+}
+header nav a:hover,
+header nav a:focus-visible {
+  background: rgba(255,255,255,0.15);
+  text-decoration: none;
+  outline: none;
+}
+
+/* ========== Brødsmuler ========== */
 .breadcrumbs {
   max-width: 1100px;
   margin: 1rem auto 0;
@@ -21,20 +98,9 @@
   color: #444;
   font-size: 0.95rem;
 }
-
-.breadcrumbs a {
-  color: #2B3549;
-  text-decoration: none;
-}
-
-.breadcrumbs a:hover {
-  text-decoration: underline;
-}
-
-.breadcrumbs .current {
-  color: #111;
-  font-weight: 600;
-}
+.breadcrumbs a { color: #2B3549; text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs .current { color: #111; font-weight: 600; }
 
 .product-layout {
   display: grid;
@@ -46,9 +112,7 @@
   text-align: left;
 }
 
-.product-media {
-  position: relative;
-}
+.product-media { position: relative; }
 
 .product-image {
   width: 100%;
@@ -65,7 +129,6 @@
   display: flex;
   gap: 0.5rem;
 }
-
 .badge {
   background: #FEE2E2;
   color: #991B1B;
@@ -74,23 +137,17 @@
   padding: 0.15rem 0.4rem;
   border-radius: 0.375rem;
 }
-
-.badge.sale {
-  background: #DCFCE7;
-  color: #166534;
-}
+.badge.sale { background: #DCFCE7; color: #166534; }
 
 .product-info h1 {
   margin: 0;
   font-size: 1.75rem;
 }
-
 .product-info p {
   margin: 0.5rem 0;
   line-height: 1.45;
   color: #333;
 }
-
 .product-meta {
   margin-top: 0.25rem;
   font-size: 0.9rem;
@@ -102,7 +159,6 @@
   font-weight: 700;
   font-size: 1.15rem;
 }
-
 .price s {
   color: #a1a1a1;
   margin-right: 0.35rem;
@@ -115,14 +171,12 @@
   align-items: end;
   margin-top: 1rem;
 }
-
 .buy select,
 .buy input[type="number"] {
   padding: 0.5rem 0.6rem;
   border: 1px solid #dadce0;
   border-radius: 0.375rem;
 }
-
 .buy button {
   background: #2B3549;
   color: #fff;
@@ -132,10 +186,7 @@
   font-weight: 600;
   cursor: pointer;
 }
-
-.buy button:hover {
-  filter: brightness(1.07);
-}
+.buy button:hover { filter: brightness(1.07); }
 
 .tags {
   display: flex;
@@ -143,7 +194,6 @@
   flex-wrap: wrap;
   margin-top: 0.5rem;
 }
-
 .tag {
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
@@ -151,24 +201,14 @@
   color: #1F2D3D;
   font-size: 0.85rem;
 }
-
-
-.related {
-  max-width: 1100px;
-  margin: 0 auto 2rem;
-  padding: 0 1rem;
-}
-
-.related h2 {
-  margin: 0 0 0.75rem;
-}
+.related { max-width: 1100px; margin: 0 auto 2rem; padding: 0 1rem; }
+.related h2 { margin: 0 0 0.75rem; }
 
 .related .products {
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) );
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
 }
-
 .related .card {
   background: #fff;
   border: 1px solid #E5E7EB;
@@ -176,12 +216,10 @@
   overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-
 .related .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
-
 .related .card img {
   width: 100%;
   height: 160px;
@@ -189,26 +227,52 @@
   object-fit: cover;
   background: #f5f5f5;
 }
-
 .related .card h3 {
   margin: 0.6rem 0.75rem 0.25rem;
   font-size: 1rem;
 }
-
 .related .price {
   margin: 0 0.75rem 0.75rem;
   font-weight: 600;
 }
-
 .related .price s {
   color: #a1a1a1;
   margin-right: 0.35rem;
 }
 
+footer {
+  width: 100%;
+  background: #3B82F6;         /* strekker seg full bredde */
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  margin-top: auto;             /* dytt ned når lite innhold */
+}
+footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+footer nav li { display: inline-flex; }
+footer nav a { color: #FFFFFF; text-decoration: none; }
+footer nav a:hover,
+footer nav a:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
 
 @media (min-width: 900px) {
-  .product-layout { 
+  .product-layout {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
+}
+
+@media (max-width: 600px) {
+  .buy { grid-template-columns: 1fr; } 
+  .product-image { max-width: 100%; }
 }

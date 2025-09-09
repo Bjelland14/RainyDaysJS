@@ -4,27 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="RainyDays – Frequently Asked Questions" />
-  <title>FAQ | RainyDays</title>
-
-  <link rel="stylesheet" href="../styles.css" />
+  <title>RainyDays | FAQ</title>
   <link rel="stylesheet" href="faq.css" />
 </head>
 <body>
+  <a href="#main" class="visually-hidden">Skip to content</a>
+
   <header>
-    <div class="header-shell">
-      <img src="../assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo" />
-      <nav aria-label="Main">
+    <div class="header-container">
+      <img src="../assets/RainyDaysLogo.png" class="logo" alt="RainyDays logo" />
+      <nav aria-label="Primary">
         <ul>
-      <li><a href="../index/index.html">Home</a></li>
-      <li><a href="../menscollection/menscollection.html">Men`s</a></li>       
-      <li><a href="../womencollection/womencollection.html">Women's</a></li>                 
-      <li><a href="../checkout/checkout.html">Cart</a></li> 
+          <li><a href="../index/index.html">Home</a></li>
+          <li><a href="../menscollection/menscollection.html">Men’s</a></li>
+          <li><a href="../womencollection/womencollection.html">Women’s</a></li>
+          <li><a href="../checkout/checkout.html">Cart</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <h1>Frequently Asked Questions</h1>
 
     <section class="faq" aria-label="FAQ">
@@ -50,23 +50,41 @@
 
       <details id="faq-contact">
         <summary>How do I contact customer service?</summary>
-        <p>You can reach us via email at support@rainydays.no.</p>
+        <p>You can reach us via email at <a href="mailto:support@rainydays.no">support@rainydays.no</a>.</p>
+      </details>
+
+      <!-- Nye spørsmål -->
+      <details id="faq-sizes">
+        <summary>How do I find the right size?</summary>
+        <p>Each product page includes a size guide. If you are between sizes, we recommend sizing up to allow layering.</p>
+      </details>
+
+      <details id="faq-care">
+        <summary>How should I wash and care for my jacket?</summary>
+        <p>Close all zippers and Velcro before washing. Use a gentle cycle with mild detergent, and hang to air dry. Avoid fabric softeners.</p>
+      </details>
+
+      <details id="faq-payment">
+        <summary>Which payment methods do you accept?</summary>
+        <p>We accept major credit cards, Vipps, and Klarna for flexible payment options.</p>
+      </details>
+
+      <details id="faq-warranty">
+        <summary>Do the jackets come with a warranty?</summary>
+        <p>Yes, all RainyDays jackets come with a 2-year warranty covering manufacturing defects.</p>
       </details>
     </section>
   </main>
 
   <footer>
-    <div class="footer-shell">
-      <nav aria-label="Footer">
-        <ul>
+    <nav aria-label="Footer">
+      <ul>
         <li><a href="../about/about.html">About</a></li>
-        <li><a href="../faq/faq.html">Customer Service</a></li>
-        <li><a href="../product/product.html">Product</a></li>
-        </ul>
-      </nav>
-    </div>
+        <li><a href="../faq/faq.html" aria-current="page">Customer Service</a></li>
+      </ul>
+    </nav>
   </footer>
 
-  <script src="faq.js" type="module"></script>
+  <script type="module" src="faq.js"></script>
 </body>
 </html>

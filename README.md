@@ -28,16 +28,13 @@ The application simulates an online store for rain jackets, where users can brow
 - FAQ  
 - About
 
-
-## 🛠️ Tech Stack  
+- Tech Stack  
 - HTML – semantic and accessible structure  
 - CSS3 – responsive design with flexbox & grid  
 - LocalStorage – cart persistence across pages  
 - Noroff API – products fetched dynamically from `https://v2.api.noroff.dev/rainy-days`  
 
----
-
- Features Implemented  
+- Features Implemented  
 - Dynamic "Product listing" with API data (no hardcoded products).  
 - Filter by gender: Men’s / Women’s collections.  
 - Product details page with sizes, quantity selector, and add-to-cart.  
@@ -46,5 +43,3 @@ The application simulates an online store for rain jackets, where users can brow
 - Confirmation page: thank you message, order summary, continue shopping.  
 - Loading indicators  when fetching data.  
 - Accessible navigation via header and footer across all pages.  
-
-
