@@ -1,4 +1,3 @@
-/* ========== Baseline / layout ========== */
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -14,7 +13,7 @@ body {
   background: #fff;
 }
 
-/* Denne må finnes i HTML: <main> ... </main> */
+
 main { flex: 1; }                /* fyller høyden mellom header og footer */
 
 /* Sentraliserte seksjoner (innhold) */
