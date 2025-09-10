@@ -4,7 +4,6 @@ const main = document.querySelector("main");
 const faq = document.querySelector(".faq");
 const items = Array.from(faq.querySelectorAll("details"));
 
-/* Toolbar (search + open/close) */
 const toolbar = document.createElement("div");
 toolbar.className = "faq-toolbar";
 toolbar.innerHTML = `
@@ -18,7 +17,6 @@ toolbar.innerHTML = `
 `;
 main.insertBefore(toolbar, faq);
 
-/* Persist open/closed state */
 function loadState() {
   try { return JSON.parse(localStorage.getItem(SCOPE) || "{}"); }
   catch { return {}; }
@@ -28,14 +26,12 @@ function saveState(state) {
 }
 const state = loadState();
 
-/* ARIA + IDs + state restore */
 items.forEach((d, idx) => {
   if (!d.id) d.id = `faq-${idx + 1}`;
   const summary = d.querySelector("summary");
   summary.setAttribute("role", "button");
   summary.setAttribute("aria-controls", `${d.id}-panel`);
 
-  // Wrap content (everything but summary) for aria-controls
   let panel = d.querySelector(":scope > .faq-panel");
   if (!panel) {
     panel = document.createElement("div");
@@ -49,7 +45,6 @@ items.forEach((d, idx) => {
   }
   panel.id = `${d.id}-panel`;
 
-  // restore open/close
   const wasOpen = state[d.id];
   if (typeof wasOpen === "boolean") d.open = wasOpen;
 
@@ -61,7 +56,6 @@ items.forEach((d, idx) => {
   });
 });
 
-/* Open/close all */
 document.querySelector("#open-all").addEventListener("click", () => {
   items.forEach(d => (d.open = true));
   items.forEach(d => (state[d.id] = true));
@@ -73,7 +67,6 @@ document.querySelector("#close-all").addEventListener("click", () => {
   saveState(state);
 });
 
-/* Search */
 const searchInput = document.querySelector("#faq-search");
 function normalize(s) {
   return (s || "")
@@ -98,7 +91,6 @@ function applyFilter(qRaw) {
 }
 searchInput.addEventListener("input", (e) => applyFilter(e.target.value));
 
-/* Deep-link: faq.html#faq-shipping opens that item */
 function openFromHash() {
   const id = location.hash?.slice(1);
   if (!id) return;
@@ -113,7 +105,6 @@ function openFromHash() {
 window.addEventListener("hashchange", openFromHash);
 openFromHash();
 
-/* Keyboard polish: Enter toggles details */
 faq.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && e.target.tagName.toLowerCase() === "summary") {
     e.preventDefault();

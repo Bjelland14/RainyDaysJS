@@ -5,25 +5,23 @@
 html, body { height: 100%; }
 
 body {
-  min-height: 100svh;           /* svh håndterer mobil adresselinje */
+  min-height: 100svh;           
   margin: 0;
   display: flex;
-  flex-direction: column;        /* gjør at footer kan dyttes ned */
+  flex-direction: column;        
   color: #111;
   background: #fff;
 }
 
 
-main { flex: 1; }                /* fyller høyden mellom header og footer */
+main { flex: 1; }                
 
-/* Sentraliserte seksjoner (innhold) */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* ========== Statusboks ========== */
 #status {
   max-width: 1100px;
   margin: 1rem auto;
@@ -39,15 +37,14 @@ main { flex: 1; }                /* fyller høyden mellom header og footer */
 #status[data-variant="info"]    { background: #EEF7FF; color: #1F2D3D; }
 #status[data-variant="error"]   { background: #FFEFEF; color: #7A1C1C; }
 
-/* ========== Header (full bredde) ========== */
 header {
   width: 100%;
-  background: #60A5FA;          /* strekker seg full bredde */
+  background: #60A5FA;          
   color: #fff;
   margin: 0;
 }
 .header-container {
-  max-width: 1100px;            /* innholdet sentreres og begrenses */
+  max-width: 1100px;            
   margin: 0 auto;
   padding: 0.75rem 1.25rem;
   display: flex;
@@ -86,7 +83,6 @@ header nav a:focus-visible {
   outline: none;
 }
 
-/* ========== Brødsmuler ========== */
 .breadcrumbs {
   max-width: 1100px;
   margin: 1rem auto 0;
@@ -241,11 +237,11 @@ header nav a:focus-visible {
 
 footer {
   width: 100%;
-  background: #3B82F6;         /* strekker seg full bredde */
+  background: #3B82F6;        
   color: #FFFFFF;
   text-align: center;
   padding: 0.75rem 1rem;
-  margin-top: auto;             /* dytt ned når lite innhold */
+  margin-top: auto;            
 }
 footer nav ul {
   list-style: none;

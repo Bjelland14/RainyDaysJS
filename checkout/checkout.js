@@ -1,8 +1,4 @@
-// >>> JUSTER DENNE STIEN SÅ DEN MATCHER PROSJEKTET DITT <<<
 const SUCCESS_PATH = "/orderconfirmation/orderconfirmation.html";
-// Eksempler på alternative plasseringer (hvis din mappe/fil heter noe annet):
-// const SUCCESS_PATH = "../checkoutsuccsess/index.html";
-// const SUCCESS_PATH = "../checkout/confirmation/index.html";
 
 const statusEl    = document.querySelector("#status");
 const listEl      = document.querySelector("#cart-list");
@@ -66,8 +62,8 @@ function render() {
 function calcTotals() {
   const cart = getCart();
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const shipping = 0; // legg evt. til fraktlogikk her
-  const tax = 0;      // legg evt. til mva.-logikk her
+  const shipping = 0; 
+  const tax = 0;      
   subtotalEl.textContent = money.format(subtotal);
   shippingEl.textContent = money.format(shipping);
   taxEl.textContent = money.format(tax);
@@ -121,11 +117,9 @@ function validateForms() {
 function completeOrder() {
   if (!validateForms()) return;
 
-  // valgfrie “nice-to-have”:
   const orderId = "RD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
   sessionStorage.setItem("orderId", orderId);
 
-  // gå til suksess-siden:
   location.href = SUCCESS_PATH;
 }
 
