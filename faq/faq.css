@@ -1,4 +1,3 @@
-/* ========== Layout / baseline (footer alltid nederst) ========== */
 html, body { height: 100%; }
 body {
   margin: 0;
@@ -9,14 +8,13 @@ body {
   background: #fff;
 }
 main {
-  flex: 1;                          /* presser footer ned */
+  flex: 1;                          
   max-width: 880px;
   margin: 2rem auto;
   padding: 0 1rem;
   text-align: left;
 }
 
-/* ========== Header (full bredde, sentrert innhold) ========== */
 header {
   width: 100%;
   background: #60A5FA;
@@ -28,7 +26,7 @@ header {
   margin: 0 auto;
   padding: 0.75rem 1.25rem;
   display: flex;
-  flex-direction: column;           /* logo over, nav under */
+  flex-direction: column;          
   align-items: center;
   gap: 0.5rem;
 }
@@ -62,14 +60,12 @@ header nav a:focus-visible {
   outline: none;
 }
 
-/* ========== Tittel ========== */
 h1 {
   text-align: center;
   margin: 0 0 1.25rem;
 }
 
-/* ========== (Valgfri) verktøylinje over FAQ ========== */
-/* Behold/bruk disse kun hvis du har søk/knapper i HTML */
+
 .faq-toolbar {
   margin: 0 auto 1rem;
   padding: .6rem .75rem;
@@ -101,14 +97,13 @@ h1 {
 }
 .faq-actions button:hover { filter: brightness(1.05); }
 
-/* ========== FAQ-innhold (details/summary) ========== */
 .faq details {
   border: 1px solid #E5E7EB;
   border-radius: .5rem;
   padding: .75rem 1rem;
   margin-bottom: 1rem;
   background: #fff;
-  transition: background .2s;
+  transition: background.2s;
 }
 .faq details[open] { background: #F9FAFB; }
 
@@ -117,7 +112,7 @@ h1 {
   cursor: pointer;
   list-style: none;
   outline: none;
-  padding-right: 1.5rem;           /* plass til pilen */
+  padding-right: 1.5rem;           
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {

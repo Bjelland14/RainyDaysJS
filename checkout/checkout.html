@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="RainyDays checkout" />
   <title>Checkout | RainyDays</title>
-
   <link rel="stylesheet" href="checkout.css" />
 </head>
 <body>
@@ -16,10 +15,10 @@
       </div>
       <nav>
         <ul>
-      <li><a href="../index/index.html">Home</a></li>
-      <li><a href="../menscollection/menscollection.html">Men`s</a></li>       
-      <li><a href="../womencollection/womencollection.html">Women's</a></li>                 
-      <li><a href="../checkout/checkout.html"aria-current="page">Cart</a></li>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="../menscollection/menscollection.html">Men`s</a></li>
+          <li><a href="../womencollection/womencollection.html">Women's</a></li>
+          <li><a href="../checkout/checkout.html" aria-current="page">Cart</a></li>
         </ul>
       </nav>
     </header>
@@ -28,15 +27,15 @@
       <div id="status" aria-live="polite"></div>
 
       <div class="checkout-layout">
-        
-        <section class="cart" aria-label="Your cart">
+
+        <section class="card cart" aria-label="Your cart">
           <h2>Cart</h2>
           <div id="cart-list" class="cart-list"></div>
         </section>
 
-        
         <section class="forms">
-          <form id="shipping" novalidate>
+
+          <form id="shipping" class="card" novalidate>
             <h2>1. Shipping and Delivery</h2>
 
             <div class="grid-2">
@@ -71,10 +70,10 @@
             </div>
           </form>
 
-          <form id="payment" novalidate>
+          <form id="payment" class="card" novalidate>
             <h2>2. Payment Method</h2>
 
-            <div class="payment-options">
+            <div class="payment-options" role="group" aria-label="Payment options">
               <label><input type="radio" name="pay" value="apple" checked /> Apple Pay</label>
               <label><input type="radio" name="pay" value="visa" /> Visa</label>
               <label><input type="radio" name="pay" value="vipps" /> Vipps</label>
@@ -87,7 +86,7 @@
               <label>Card number*
                 <input name="cardNumber" inputmode="numeric" minlength="12" maxlength="19" required />
               </label>
-              <label>Expiry (MM/YY)* 
+              <label>Expiry (MM/YY)*
                 <input name="expiry" placeholder="MM/YY" required />
               </label>
               <label>CVV*
@@ -95,9 +94,10 @@
               </label>
             </div>
           </form>
+
         </section>
 
-        <aside class="summary" aria-label="Order summary">
+        <aside class="card summary" aria-label="Order summary">
           <h2>3. Complete Order</h2>
 
           <div class="summary-rows">
@@ -109,14 +109,15 @@
 
           <button id="complete" class="complete-btn" type="button">Complete order</button>
         </aside>
+
       </div>
     </main>
 
     <footer>
       <nav>
         <ul>
-        <li><a href="../about/about.html">About</a></li>
-        <li><a href="../faq/faq.html">Customer Service</a></li>
+          <li><a href="../about/about.html">About</a></li>
+          <li><a href="../faq/faq.html">Customer Service</a></li>
         </ul>
       </nav>
     </footer>
