@@ -1,4 +1,13 @@
-const SUCCESS_PATH = "/orderconfirmation/orderconfirmation.html";
+// VELG ÉN AV DISSE basert på hvor bekreftelsen ligger:
+
+// A) Hvis du har: /checkout/confirmation/index.html
+const SUCCESS_PATH = "./confirmation/";
+
+// B) Hvis du har: /orderconfirmation/orderconfirmation.html (mappe i roten)
+/// const SUCCESS_PATH = "../orderconfirmation/orderconfirmation.html";
+
+// C) Hvis du har: /orderconfirmation/index.html (mappe i roten)
+/// const SUCCESS_PATH = "../orderconfirmation/";
 
 const statusEl    = document.querySelector("#status");
 const listEl      = document.querySelector("#cart-list");
@@ -62,8 +71,8 @@ function render() {
 function calcTotals() {
   const cart = getCart();
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const shipping = 0; 
-  const tax = 0;      
+  const shipping = 0;
+  const tax = 0;
   subtotalEl.textContent = money.format(subtotal);
   shippingEl.textContent = money.format(shipping);
   taxEl.textContent = money.format(tax);
@@ -128,9 +137,11 @@ function completeOrder() {
     setStatus("Loading cart…", "loading");
     render();
     setStatus("");
-  } catch (e) {
+  } catch {
     setStatus("Could not load your cart.", "error");
   }
 
-  completeBtn.addEventListener("click", completeOrder);
+  if (completeBtn) {
+    completeBtn.addEventListener("click", completeOrder);
+  }
 })();
