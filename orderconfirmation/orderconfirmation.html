@@ -6,21 +6,26 @@
   <meta name="description" content="Order confirmation – RainyDays" />
   <title>Order Confirmation | RainyDays</title>
 
-    
+  <!-- CSS ligger i samme mappe som denne fila -->
   <link rel="stylesheet" href="orderconfirmation.css" />
 </head>
 <body>
   <header>
     <div class="header-container">
-      <img src="../assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo" />
+      <!-- To nivåer opp til /assets -->
+      <img src="../../assets/RainyDaysLogo.png" class="logo" alt="RainyDays Logo" />
     </div>
-    <nav>
+    <nav aria-label="Main">
       <ul>
-      <li><a href="../index/index.html">Home</a></li>
+        <!-- Hjem er i roten: gå to nivåer opp -->
+        <li><a href="../../">Home</a></li>
 
-      <li><a href="menscollection/menscollection.html">Men’s</a></li>
-      <li><a href="womencollection/womencollection.html">Women’s</a></li>
-      <li><a href="checkout/checkout.html">Cart</a></li>
+        <!-- Disse mappene ligger i roten: gå to nivåer opp -->
+        <li><a href="../../menscollection/menscollection.html">Men’s</a></li>
+        <li><a href="../../womencollection/womencollection.html">Women’s</a></li>
+
+        <!-- Checkout ligger én mappe opp -->
+        <li><a href="../checkout.html">Cart</a></li>
       </ul>
     </nav>
   </header>
@@ -68,25 +73,30 @@
       </div>
 
       <div class="actions">
-        <a class="button" href="../index/index.html">Continue shopping</a>
-        <a class="button secondary" href="../checkout/checkout.html">View cart</a>
+        <!-- Fortsett å handle: hjem (to nivåer opp) -->
+        <a class="button" href="../../">Continue shopping</a>
+        <!-- Handlekurv: én mappe opp -->
+        <a class="button secondary" href="../checkout.html">View cart</a>
       </div>
 
       <div class="help">
-        <p>Need help? Visit our <a href="../faq/faq.html">Customer Service</a> page.</p>
+        <!-- FAQ i roten: to nivåer opp -->
+        <p>Need help? Visit our <a href="../../faq/faq.html">Customer Service</a> page.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <nav>
+    <nav aria-label="Footer">
       <ul>
-        <li><a href="../about/about.html">About</a></li>
-        <li><a href="../faq/faq.html">Customer Service</a></li>
+        <!-- About/FAQ i roten: to nivåer opp -->
+        <li><a href="../../about/about.html">About</a></li>
+        <li><a href="../../faq/faq.html">Customer Service</a></li>
       </ul>
     </nav>
   </footer>
 
+  <!-- JS ligger i samme mappe som denne fila -->
   <script type="module" src="orderconfirmation.js"></script>
 </body>
 </html>
