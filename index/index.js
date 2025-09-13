@@ -1,4 +1,5 @@
 const API = "https://v2.api.noroff.dev/rainy-days";
+
 const listEl = document.querySelector("#product-list");
 const controlsEl = document.querySelector("#controls");
 const statusEl = document.querySelector("#status");
@@ -9,61 +10,92 @@ function setStatus(msg) {
   if (!statusEl) return;
   statusEl.hidden = !msg;
   statusEl.textContent = msg || "";
+  statusEl.dataset.variant = msg ? "info" : "";
 }
 
-function productHref(p) {
-  if (p.gender === "Male") return `menscollection/?id=${encodeURIComponent(p.id)}`;
-  if (p.gender === "Female") return `womencollection/?id=${encodeURIComponent(p.id)}`;
-  return `product/?id=${encodeURIComponent(p.id)}`;
+function productHref(id) {
+  
+  return `product/product.html?id=${encodeURIComponent(id)}`;
 }
 
 function card(p) {
-  const onSale = p.onSale && p.discountedPrice < p.price;
-  const price = onSale
-    ? `<s>${money.format(p.price)}</s> <strong>${money.format(p.discountedPrice)}</strong>`
+  const onSale = p.onSale && typeof p.discountedPrice === "number" && p.discountedPrice < p.price;
+  const priceHtml = onSale
+    ? `<s>${money.format(p.price)}</s> <strong aria-label="Discounted price">${money.format(p.discountedPrice)}</strong>`
     : `<strong>${money.format(p.price)}</strong>`;
+
+  const imgUrl = p.image?.url || "";
+  const imgAlt = p.image?.alt || p.title || "Product image";
 
   return `
     <article class="card">
-      <a href="${productHref(p)}">
-        <img src="${p.image.url}" alt="${p.image.alt}" />
+      <a class="card-link" href="${productHref(p.id)}" aria-label="View ${p.title}">
+        <img src="${imgUrl}" alt="${imgAlt}" loading="lazy" />
         <h3>${p.title}</h3>
       </a>
-      <p class="price">${price}</p>
-      <a class="button" href="${productHref(p)}">Show details</a>
+      <p class="price">${priceHtml}</p>
+      <p class="meta">
+        <span>${p.gender || "Unisex"}</span>
+        ${Array.isArray(p.tags) && p.tags.length ? ` • <span>${p.tags.join(", ")}</span>` : ""}
+      </p>
+      <a class="button" href="${productHref(p.id)}">Show details</a>
     </article>
   `;
 }
 
 function render(list) {
-  listEl.innerHTML = list.length ? list.map(card).join("") : "<p>No products found.</p>";
+  if (!listEl) return;
+  listEl.innerHTML = list && list.length
+    ? list.map(card).join("")
+    : `<p role="status">Found no products.</p>`;
 }
 
 (async function init() {
   try {
-    setStatus("Loading…");
-    const res = await fetch(API);
-    const { data } = await res.json();
-    render(data);
+    setStatus("Laster produkter …");
 
-    controlsEl.innerHTML = `
-      <form id="filters">
-        <select name="gender">
-          <option value="">All</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-        <button>Filter</button>
-      </form>
-    `;
-    const form = document.querySelector("#filters");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const g = new FormData(form).get("gender");
-      render(g ? data.filter((p) => p.gender === g) : data);
-    });
+    const res = await fetch(API, { headers: { Accept: "application/json" } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const payload = await res.json();
+    const data = Array.isArray(payload?.data) ? payload.data : [];
+
+    const url = new URL(location.href);
+    const genderFromURL = url.searchParams.get("gender") || "";
+
+    const initial = genderFromURL ? data.filter(p => p.gender === genderFromURL) : data;
+    render(initial);
+
+    if (controlsEl) {
+      controlsEl.innerHTML = `
+        <form id="filters" class="filters">
+          <label>
+            Gender:
+            <select name="gender">
+              <option value="">All</option>
+              <option value="Male"${genderFromURL==="Male"?" selected":""}>Male</option>
+              <option value="Female"${genderFromURL==="Female"?" selected":""}>Female</option>
+            </select>
+          </label>
+          <button type="submit">Use filter</button>
+        </form>
+      `;
+
+      const form = controlsEl.querySelector("#filters");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const g = new FormData(form).get("gender") || "";
+        const filtered = g ? data.filter(p => p.gender === g) : data;
+        render(filtered);
+
+        const next = new URL(location.href);
+        if (g) next.searchParams.set("gender", g);
+        else next.searchParams.delete("gender");
+        history.replaceState({}, "", next);
+      });
+    }
   } catch (e) {
-    setStatus("Error loading products.");
+    console.error(e);
+    setStatus("Could not retrieve products. Please try again later.");
   } finally {
     setStatus("");
   }
