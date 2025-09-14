@@ -6,7 +6,7 @@ const subtotalEl  = document.querySelector("#sum-subtotal");
 const totalEl     = document.querySelector("#sum-total");
 const shippingEl  = document.querySelector("#sum-shipping");
 const taxEl       = document.querySelector("#sum-tax");
-const completeBtn = document.querySelector("#complete");
+const completeBtn = document.querySelector("#complete";
 
 const money = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK" });
 
@@ -143,41 +143,20 @@ function validateForms() {
   }
 
   expiry.setCustomValidity("");
-
-  const raw = digitsOnly(expiry.value);
-  let mmStr = "", yyStr = "";
-  if (raw.length === 3) {          
-    mmStr = "0" + raw[0];
-    yyStr = raw.slice(1);
-  } else if (raw.length >= 4) {    
-    mmStr = raw.slice(0, 2);
-    yyStr = raw.slice(2, 4);
-  } else {
+  const match = String(expiry.value || "").match(/^(\d{2})\s*\/\s*(\d{2})$/);
+  if (!match) {
     return invalid(expiry, "Expiry must be in MM/YY format.");
   }
-
-  const mm = Number(mmStr);
-  const yy = Number(yyStr);
-  if (!Number.isInteger(mm) || !Number.isInteger(yy)) {
-    return invalid(expiry, "Expiry must be in MM/YY format.");
-  }
+  const mm = Number(match[1]);
+  const yy = Number(match[2]);
   if (mm < 1 || mm > 12) {
     return invalid(expiry, "Expiry month must be 01–12.");
   }
-
   const fullYear = 2000 + yy;
-
-  const boundaryYear = 2025;
-  const boundaryMonth = 9; // September
-  const beforeBoundary =
-    fullYear < boundaryYear ||
-    (fullYear === boundaryYear && mm < boundaryMonth);
-
-  if (beforeBoundary) {
+  const expiryDate = new Date(fullYear, mm, 0, 23, 59, 59);
+  if (expiryDate < new Date()) {
     return invalid(expiry, "Card has expired.");
   }
-
-  expiry.value = `${String(mm).padStart(2,"0")}/${String(yy).padStart(2,"0")}`;
 
   email.setCustomValidity("");
   if (!email.checkValidity()) {
@@ -200,6 +179,7 @@ function validateForms() {
 
 async function completeOrder(ev) {
   if (ev && ev.preventDefault) ev.preventDefault();
+
   if (!validateForms()) return;
 
   const btn = ev?.currentTarget;
@@ -211,6 +191,7 @@ async function completeOrder(ev) {
 
     const orderId = "RD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     sessionStorage.setItem("orderId", orderId);
+
     window.location.href = SUCCESS_PATH;
   } catch {
     setStatus("Something went wrong while processing your order.", "error");
@@ -247,31 +228,9 @@ async function completeOrder(ev) {
     cvv.value = digitsOnly(cvv.value).slice(0, 4);
   });
 
-  if (expiry) {
-    expiry.setAttribute("maxlength", "5");
-
-    expiry.addEventListener("input", () => {
-      const start = expiry.selectionStart;
-      const end   = expiry.selectionEnd;
-
-      let v = expiry.value.replace(/[^\d/]/g, "");   
-      const parts = v.split("/");
-      if (parts.length > 2) {
-        v = parts[0] + "/" + parts.slice(1).join("").replace(/\//g, "");
-      }
-      if (v.length > 5) v = v.slice(0, 5);
-
-      expiry.value = v;
-      try { expiry.setSelectionRange(start, end); } catch {}
-    });
-
-    expiry.addEventListener("blur", () => {
-      const raw = (expiry.value || "").replace(/[^\d]/g, "");
-      if (raw.length === 3) {
-        expiry.value = `0${raw[0]}/${raw.slice(1)}`;
-      } else if (raw.length === 4) {
-        expiry.value = `${raw.slice(0, 2)}/${raw.slice(2)}`;
-      }
-    });
-  }
+  expiry?.addEventListener("input", () => {
+    const raw = digitsOnly(expiry.value).slice(0, 4);
+    if (raw.length >= 3) expiry.value = `${raw.slice(0,2)}/${raw.slice(2)}`;
+    else expiry.value = raw;
+  });
 })();
