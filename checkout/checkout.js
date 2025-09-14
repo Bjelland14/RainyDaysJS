@@ -143,23 +143,41 @@ function validateForms() {
   }
 
   expiry.setCustomValidity("");
-  const match = String(expiry.value || "").match(/^(\d{2})\s*\/\s*(\d{2})$/);
-  if (!match) {
+
+  const raw = digitsOnly(expiry.value);
+  let mmStr = "", yyStr = "";
+
+  if (raw.length === 3) {            
+    mmStr = "0" + raw[0];
+    yyStr = raw.slice(1);
+  } else if (raw.length >= 4) {      
+    mmStr = raw.slice(0, 2);
+    yyStr = raw.slice(2, 4);
+  } else {
     return invalid(expiry, "Expiry must be in MM/YY format.");
   }
-  const mm = Number(match[1]);   
-  const yy = Number(match[2]);   
+
+  const mm = Number(mmStr);
+  const yy = Number(yyStr);
+
+  if (!Number.isInteger(mm) || !Number.isInteger(yy)) {
+    return invalid(expiry, "Expiry must be in MM/YY format.");
+  }
   if (mm < 1 || mm > 12) {
     return invalid(expiry, "Expiry month must be 01–12.");
   }
+
   const fullYear = 2000 + yy;
 
   const now = new Date();
-  const expYM = fullYear * 12 + (mm - 1);         
-  const nowYM = now.getFullYear() * 12 + now.getMonth(); 
+  const expYM = fullYear * 12 + (mm - 1);
+  const nowYM = now.getFullYear() * 12 + now.getMonth();
+
   if (expYM < nowYM) {
     return invalid(expiry, "Card has expired.");
   }
+
+  expiry.value = `${mmStr.padStart(2, "0")}/${yyStr}`;
 
   email.setCustomValidity("");
   if (!email.checkValidity()) {
@@ -234,7 +252,20 @@ async function completeOrder(ev) {
 
   expiry?.addEventListener("input", () => {
     const raw = digitsOnly(expiry.value).slice(0, 4);
-    if (raw.length >= 3) expiry.value = `${raw.slice(0,2)}/${raw.slice(2)}`;
-    else expiry.value = raw;
+    let mm = "", yy = "";
+
+    if (raw.length <= 2) {           
+      mm = raw;
+      expiry.value = mm;
+      return;
+    }
+    if (raw.length === 3) {          
+      mm = "0" + raw[0];
+      yy = raw.slice(1);
+    } else {                         
+      mm = raw.slice(0, 2);
+      yy = raw.slice(2, 4);
+    }
+    expiry.value = `${mm}/${yy}`;
   });
 })();
