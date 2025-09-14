@@ -16,17 +16,15 @@
       <nav>
         <ul>
           <li><a id="homeLink" href="../">Home</a></li>
-
           <li><a href="../menscollection/menscollection.html">Men’s</a></li>
           <li><a href="../womencollection/womencollection.html">Women’s</a></li>
-          
           <li><a href="./checkout.html" aria-current="page">Cart</a></li>
-
         </ul>
       </nav>
     </header>
 
     <main class="container">
+
       <div id="status" aria-live="polite"></div>
 
       <div class="checkout-layout">
@@ -37,37 +35,41 @@
         </section>
 
         <section class="forms">
+
           <form id="shipping" class="card" novalidate>
             <h2>1. Shipping and Delivery</h2>
 
             <div class="grid-2">
               <label>First name*
-                <input name="firstName" type="text" required />
+                <input name="firstName" type="text" autocomplete="given-name" required />
               </label>
               <label>Last name*
-                <input name="lastName" type="text" required />
+                <input name="lastName" type="text" autocomplete="family-name" required />
               </label>
             </div>
 
             <label>Address*
-              <input name="address" type="text" required />
+              <input name="address" type="text" autocomplete="street-address" required />
             </label>
 
             <div class="grid-2">
               <label>City*
-                <input name="city" type="text" required />
+                <input name="city" type="text" autocomplete="address-level2" required />
               </label>
               <label>Post code*
-                <input name="postCode" type="text" required />
+                <input name="postCode" type="text" inputmode="numeric"
+                       pattern="[0-9]{4}" title="4 digits" autocomplete="postal-code" required />
               </label>
             </div>
 
             <div class="grid-2">
               <label>Phone number*
-                <input name="phone" type="tel" required />
+                <input name="phone" type="tel" inputmode="numeric"
+                       pattern="[0-9]{8,}" title="At least 8 digits"
+                       autocomplete="tel-national" required />
               </label>
               <label>Email*
-                <input name="email" type="email" required />
+                <input name="email" type="email" autocomplete="email" required />
               </label>
             </div>
           </form>
@@ -83,16 +85,23 @@
 
             <div class="card-fields grid-2">
               <label>Cardholder’s name*
-                <input name="cardName" type="text" required />
+                <input name="cardName" type="text" autocomplete="cc-name" required />
               </label>
               <label>Card number*
-                <input name="cardNumber" inputmode="numeric" minlength="12" maxlength="19" required />
+                <input name="cardNumber" inputmode="numeric"
+                       minlength="12" maxlength="19"
+                       autocomplete="cc-number" required />
               </label>
               <label>Expiry (MM/YY)*
-                <input name="expiry" placeholder="MM/YY" required />
+                <input name="expiry" placeholder="MM/YY"
+                       autocomplete="cc-exp"
+                       pattern="(0[1-9]|1[0-2])\/\d{2}" title="MM/YY" required />
               </label>
               <label>CVV*
-                <input name="cvv" inputmode="numeric" minlength="3" maxlength="4" required />
+                <input name="cvv" inputmode="numeric"
+                       minlength="3" maxlength="4"
+                       pattern="\d{3,4}" title="3 or 4 digits"
+                       autocomplete="cc-csc" required />
               </label>
             </div>
           </form>
@@ -108,10 +117,9 @@
             <div class="total"><span>Total</span><span id="sum-total">–</span></div>
           </div>
 
-       <a class="complete-btn" href="../orderconfirmation/orderconfirmation.html">
-        Complete order
-       </a>
-
+          <button id="complete" class="complete-btn" type="button">
+            Complete order
+          </button>
         </aside>
 
       </div>

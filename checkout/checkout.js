@@ -15,6 +15,8 @@ function setStatus(msg, variant = "info") {
   statusEl.hidden = !msg;
   statusEl.textContent = msg || "";
   statusEl.dataset.variant = msg ? variant : "";
+
+  statusEl.setAttribute("role", variant === "error" ? "alert" : "status");
 }
 function showLoading(msg = "Processing order…") { setStatus(msg, "loading"); }
 function hideStatus() { setStatus(""); }
@@ -181,14 +183,23 @@ async function completeOrder(ev) {
 
   if (!validateForms()) return;
 
+  const btn = ev?.currentTarget;
+  btn?.setAttribute("disabled", "true");
+
   showLoading("Processing order…");
 
-  await new Promise(r => setTimeout(r, 600));
+  try {
+    await new Promise(r => setTimeout(r, 600));
 
-  const orderId = "RD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
-  sessionStorage.setItem("orderId", orderId);
+    const orderId = "RD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+    sessionStorage.setItem("orderId", orderId);
 
-  window.location.href = SUCCESS_PATH;
+    window.location.href = SUCCESS_PATH;
+  } catch {
+    setStatus("Something went wrong while processing your order.", "error");
+  } finally {
+    btn?.removeAttribute("disabled");
+  }
 }
 
 (function init() {
@@ -201,6 +212,9 @@ async function completeOrder(ev) {
   }
 
   completeBtn?.addEventListener("click", completeOrder);
+
+  document.querySelector("#shipping")?.addEventListener("submit", e => e.preventDefault());
+  document.querySelector("#payment")?.addEventListener("submit", e => e.preventDefault());
 
   const payment  = document.querySelector("#payment");
   const cardNumber = payment?.querySelector('input[name="cardNumber"]');
