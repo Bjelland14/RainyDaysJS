@@ -11,19 +11,19 @@ const completeBtn = document.querySelector("#complete");
 const money = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK" });
 
 function setStatus(msg, variant = "info") {
+  if (!statusEl) return;
   statusEl.hidden = !msg;
   statusEl.textContent = msg || "";
   statusEl.dataset.variant = msg ? variant : "";
 }
+function showLoading(msg = "Processing order…") { setStatus(msg, "loading"); }
+function hideStatus() { setStatus(""); }
 
 function getCart() {
   try { return JSON.parse(localStorage.getItem("cart") || "[]"); }
   catch { return []; }
 }
-
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
+function saveCart(cart) { localStorage.setItem("cart", JSON.stringify(cart)); }
 
 function line(item) {
   const lineTotal = item.price * item.qty;
@@ -62,8 +62,8 @@ function render() {
 function calcTotals() {
   const cart = getCart();
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const shipping = 0; 
-  const tax = 0;      
+  const shipping = 0;
+  const tax = 0;
   subtotalEl.textContent = money.format(subtotal);
   shippingEl.textContent = money.format(shipping);
   taxEl.textContent = money.format(tax);
@@ -97,40 +97,128 @@ function bindRowEvents() {
   });
 }
 
+function digitsOnly(str) { return String(str || "").replace(/\D+/g, ""); }
+
+function invalid(el, message) {
+  if (!el) return false;
+  el.setCustomValidity(message || "");
+  el.reportValidity();
+  el.focus();
+  return false;
+}
+
 function validateForms() {
   const shipping = document.querySelector("#shipping");
   const payment  = document.querySelector("#payment");
-  if (!shipping.checkValidity()) {
+
+  if (!shipping?.checkValidity()) {
     setStatus("Please fill out all required shipping fields.", "error");
-    shipping.reportValidity();
+    shipping?.reportValidity();
     return false;
   }
-  if (!payment.checkValidity()) {
+  if (!payment?.checkValidity()) {
     setStatus("Please fill out all required payment fields.", "error");
-    payment.reportValidity();
+    payment?.reportValidity();
     return false;
   }
-  setStatus("");
+
+  const cardName   = payment.querySelector('input[name="cardName"]');
+  const cardNumber = payment.querySelector('input[name="cardNumber"]');
+  const expiry     = payment.querySelector('input[name="expiry"]');
+  const cvv        = payment.querySelector('input[name="cvv"]');
+  const email      = shipping.querySelector('input[name="email"]');
+  const phone      = shipping.querySelector('input[name="phone"]');
+
+  const ccDigits = digitsOnly(cardNumber?.value);
+  cardNumber.setCustomValidity("");
+  if (ccDigits.length < 12 || ccDigits.length > 19) {
+    return invalid(cardNumber, "Card number must be 12–19 digits.");
+  }
+
+  const cvvDigits = digitsOnly(cvv?.value);
+  cvv.setCustomValidity("");
+  if (!/^\d{3,4}$/.test(cvvDigits)) {
+    return invalid(cvv, "CVV must be 3 or 4 digits.");
+  }
+
+  expiry.setCustomValidity("");
+  const match = String(expiry.value || "").match(/^(\d{2})\s*\/\s*(\d{2})$/);
+  if (!match) {
+    return invalid(expiry, "Expiry must be in MM/YY format.");
+  }
+  const mm = Number(match[1]);
+  const yy = Number(match[2]);
+  if (mm < 1 || mm > 12) {
+    return invalid(expiry, "Expiry month must be 01–12.");
+  }
+  const fullYear = 2000 + yy;
+  const expiryDate = new Date(fullYear, mm, 0, 23, 59, 59);
+  if (expiryDate < new Date()) {
+    return invalid(expiry, "Card has expired.");
+  }
+
+  email.setCustomValidity("");
+  if (!email.checkValidity()) {
+    return invalid(email, "Please enter a valid email address.");
+  }
+
+  phone.setCustomValidity("");
+  if (digitsOnly(phone.value).length < 8) {
+    return invalid(phone, "Please enter a valid phone number (at least 8 digits).");
+  }
+
+  if (getCart().length === 0) {
+    setStatus("Your cart is empty.", "error");
+    return false;
+  }
+
+  hideStatus();
   return true;
 }
 
-function completeOrder() {
+async function completeOrder(ev) {
+  if (ev && ev.preventDefault) ev.preventDefault();
+
   if (!validateForms()) return;
+
+  showLoading("Processing order…");
+
+  await new Promise(r => setTimeout(r, 600));
 
   const orderId = "RD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
   sessionStorage.setItem("orderId", orderId);
 
-  location.href = SUCCESS_PATH;
+  window.location.href = SUCCESS_PATH;
 }
 
 (function init() {
   try {
     setStatus("Loading cart…", "loading");
     render();
-    setStatus("");
-  } catch (e) {
+    hideStatus();
+  } catch {
     setStatus("Could not load your cart.", "error");
   }
 
-  completeBtn.addEventListener("click", completeOrder);
+  completeBtn?.addEventListener("click", completeOrder);
+
+  const payment  = document.querySelector("#payment");
+  const cardNumber = payment?.querySelector('input[name="cardNumber"]');
+  const cvv        = payment?.querySelector('input[name="cvv"]');
+  const expiry     = payment?.querySelector('input[name="expiry"]');
+
+  cardNumber?.addEventListener("input", () => {
+    const digits = digitsOnly(cardNumber.value).slice(0, 19);
+    cardNumber.value = digits.replace(/(\d{4})(?=\d)/g, "$1 ");
+  });
+
+  cvv?.addEventListener("input", () => {
+    cvv.value = digitsOnly(cvv.value).slice(0, 4);
+  });
+
+  expiry?.addEventListener("input", () => {
+    const raw = digitsOnly(expiry.value).slice(0, 4);
+    if (raw.length >= 3) expiry.value = `${raw.slice(0,2)}/${raw.slice(2)}`;
+    else expiry.value = raw;
+  });
 })();
