@@ -168,8 +168,7 @@ function validateForms() {
   const fullYear = 2000 + yy;
 
   const boundaryYear = 2025;
-  const boundaryMonth = 9; 
-
+  const boundaryMonth = 9; // September
   const beforeBoundary =
     fullYear < boundaryYear ||
     (fullYear === boundaryYear && mm < boundaryMonth);
@@ -201,12 +200,10 @@ function validateForms() {
 
 async function completeOrder(ev) {
   if (ev && ev.preventDefault) ev.preventDefault();
-
   if (!validateForms()) return;
 
   const btn = ev?.currentTarget;
   btn?.setAttribute("disabled", "true");
-
   showLoading("Processing order…");
 
   try {
@@ -214,7 +211,6 @@ async function completeOrder(ev) {
 
     const orderId = "RD-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     sessionStorage.setItem("orderId", orderId);
-
     window.location.href = SUCCESS_PATH;
   } catch {
     setStatus("Something went wrong while processing your order.", "error");
@@ -251,22 +247,31 @@ async function completeOrder(ev) {
     cvv.value = digitsOnly(cvv.value).slice(0, 4);
   });
 
-  expiry?.addEventListener("input", () => {
-    const raw = digitsOnly(expiry.value).slice(0, 4); 
-    let mm = "", yy = "";
+  if (expiry) {
+    expiry.setAttribute("maxlength", "5");
 
-    if (raw.length <= 2) {           
-      mm = raw;
-      expiry.value = mm;
-      return;
-    }
-    if (raw.length === 3) {          
-      mm = "0" + raw[0];
-      yy = raw.slice(1);
-    } else {                         
-      mm = raw.slice(0, 2);
-      yy = raw.slice(2, 4);
-    }
-    expiry.value = `${mm}/${yy}`;
-  });
+    expiry.addEventListener("input", () => {
+      const start = expiry.selectionStart;
+      const end   = expiry.selectionEnd;
+
+      let v = expiry.value.replace(/[^\d/]/g, "");   
+      const parts = v.split("/");
+      if (parts.length > 2) {
+        v = parts[0] + "/" + parts.slice(1).join("").replace(/\//g, "");
+      }
+      if (v.length > 5) v = v.slice(0, 5);
+
+      expiry.value = v;
+      try { expiry.setSelectionRange(start, end); } catch {}
+    });
+
+    expiry.addEventListener("blur", () => {
+      const raw = (expiry.value || "").replace(/[^\d]/g, "");
+      if (raw.length === 3) {
+        expiry.value = `0${raw[0]}/${raw.slice(1)}`;
+      } else if (raw.length === 4) {
+        expiry.value = `${raw.slice(0, 2)}/${raw.slice(2)}`;
+      }
+    });
+  }
 })();
