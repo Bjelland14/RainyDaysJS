@@ -1,6 +1,6 @@
  RainyDays- JS assignment 1
 
-RainyDays is a prototype e-commerce webshop built as part of the Noroff Frontend Development course.  
+RainyDays is a prototype e-commerce webshop.
 The application simulates an online store for rain jackets, where users can browse products, view product details, add items to a cart, and complete a checkout process with an order confirmation screen.  
 
 
@@ -35,7 +35,6 @@ The application simulates an online store for rain jackets, where users can brow
 - Noroff API – products fetched dynamically from `https://v2.api.noroff.dev/rainy-days`  
 
 - Features Implemented  
-- Dynamic "Product listing" with API data (no hardcoded products).  
 - Filter by gender: Men’s / Women’s collections.  
 - Product details page with sizes, quantity selector, and add-to-cart.  
 - Cart management: update quantity, remove items.  
