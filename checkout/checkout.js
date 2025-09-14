@@ -6,7 +6,7 @@ const subtotalEl  = document.querySelector("#sum-subtotal");
 const totalEl     = document.querySelector("#sum-total");
 const shippingEl  = document.querySelector("#sum-shipping");
 const taxEl       = document.querySelector("#sum-tax");
-const completeBtn = document.querySelector("#complete";
+const completeBtn = document.querySelector("#complete");
 
 const money = new Intl.NumberFormat("nb-NO", { style: "currency", currency: "NOK" });
 
