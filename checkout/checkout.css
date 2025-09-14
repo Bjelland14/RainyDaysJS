@@ -1,6 +1,6 @@
 html, body { height: 100%; margin: 0; }
 .page-wrapper { min-height: 100%; display: flex; flex-direction: column; }
-main { flex: 1; background: #fafafa; color: #111; font-family:Aria; }
+main { flex: 1; background: #fafafa; color: #111; font-family: Arial, sans-serif; }
 
 header {
   width: 100%;
@@ -60,12 +60,12 @@ header nav a:hover { background: rgba(255,255,255,.15); }
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem; 
+  gap: 1rem;
 }
 .forms label {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem; 
+  gap: 0.4rem;
 }
 .forms input {
   width: 100%;
@@ -82,12 +82,28 @@ header nav a:hover { background: rgba(255,255,255,.15); }
 .summary-rows { display: grid; gap: 0.5rem; }
 .summary-rows > div { display: flex; justify-content: space-between; }
 .summary-rows .total { font-weight: 700; }
+
 .complete-btn {
-  width: 100%; margin-top: 1rem;
-  background: #2B3549; color: #fff; border: 0; padding: 0.8rem;
-  border-radius: 0.5rem; font-weight: 700; cursor: pointer;
+  display: inline-block;      
+  width: 100%;
+  margin-top: 1rem;
+  background: #2B3549;
+  color: #fff;                
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;      
+  border: 0;
+  cursor: pointer;
+  transition: filter .15s ease;
 }
-.complete-btn:hover { filter: brightness(1.1); }
+.complete-btn:hover,
+.complete-btn:focus { filter: brightness(1.1); text-decoration: none; }
+
+.complete-btn:empty::after { content: "Complete order"; color: #fff; }
 
 footer {
   width: 100%; background: #3B82F6; color: #fff;
