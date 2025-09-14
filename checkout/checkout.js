@@ -15,7 +15,6 @@ function setStatus(msg, variant = "info") {
   statusEl.hidden = !msg;
   statusEl.textContent = msg || "";
   statusEl.dataset.variant = msg ? variant : "";
-
   statusEl.setAttribute("role", variant === "error" ? "alert" : "status");
 }
 function showLoading(msg = "Processing order…") { setStatus(msg, "loading"); }
@@ -148,14 +147,17 @@ function validateForms() {
   if (!match) {
     return invalid(expiry, "Expiry must be in MM/YY format.");
   }
-  const mm = Number(match[1]);
-  const yy = Number(match[2]);
+  const mm = Number(match[1]);   
+  const yy = Number(match[2]);   
   if (mm < 1 || mm > 12) {
     return invalid(expiry, "Expiry month must be 01–12.");
   }
   const fullYear = 2000 + yy;
-  const expiryDate = new Date(fullYear, mm, 0, 23, 59, 59);
-  if (expiryDate < new Date()) {
+
+  const now = new Date();
+  const expYM = fullYear * 12 + (mm - 1);         
+  const nowYM = now.getFullYear() * 12 + now.getMonth(); 
+  if (expYM < nowYM) {
     return invalid(expiry, "Card has expired.");
   }
 
