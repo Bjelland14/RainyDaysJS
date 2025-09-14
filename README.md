@@ -1,6 +1,6 @@
  RainyDays- JS assignment 1
 
-RainyDays is a prototype e-commerce webshop built as part of the Noroff Frontend Development course.  
+RainyDays is a prototype e-commerce webshop.
 The application simulates an online store for rain jackets, where users can browse products, view product details, add items to a cart, and complete a checkout process with an order confirmation screen.  
 
 
