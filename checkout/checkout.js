@@ -1,6 +1,5 @@
 const SUCCESS_PATH = "../orderconfirmation/orderconfirmation.html";
 
-
 const statusEl    = document.querySelector("#status");
 const listEl      = document.querySelector("#cart-list");
 const subtotalEl  = document.querySelector("#sum-subtotal");
